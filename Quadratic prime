@@ -1,0 +1,44 @@
+public class QuadraticPrimes {
+    public static void main(String[] args) {
+        int limit = 1000;
+        int maxA = 0;
+        int maxB = 0;
+        int maxN = 0;
+
+        for (int a = -limit + 1; a < limit; a++) {
+            for (int b = -limit; b <= limit; b++) {
+                int n = 0;
+                while (isPrime(Math.abs(n * n + a * n + b))) {
+                    n++;
+                }
+                if (n > maxN) {
+                    maxN = n;
+                    maxA = a;
+                    maxB = b;
+                }
+            }
+        }
+
+        System.out.println("The coefficients are a = " + maxA + ", b = " + maxB);
+        System.out.println("The product of the coefficients is " + (maxA * maxB));
+    }
+
+    // Method to check if a number is prime
+    private static boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+        if (number == 2) {
+            return true;
+        }
+        if (number % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i <= Math.sqrt(number); i += 2) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
